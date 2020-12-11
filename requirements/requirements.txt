@@ -1,4 +1,6 @@
 Api Requirements:
 
 1. Register user on mailing list
+  - email has be valid
+  - name has be valid
 2. Mail user with bonus
