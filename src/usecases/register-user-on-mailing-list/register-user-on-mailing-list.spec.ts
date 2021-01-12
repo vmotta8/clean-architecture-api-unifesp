@@ -4,6 +4,7 @@ import { InMemoryUserRepository } from './repository/in-memory-user-repository'
 import { RegisterUserOnMailingList } from './register-user-on-mailing-list'
 import { InvalidEmailError } from '../../entities/errors/invalid-email-error'
 import { left } from '../../shared/either'
+import { InvalidNameError } from '../../entities/errors/invalid-name-error'
 
 describe('Register user on mailing list', () => {
   it('should add user with complete data to mailing list', async () => {
@@ -34,5 +35,20 @@ describe('Register user on mailing list', () => {
     const user = repo.findUserByEmail(invalidEmail)
     expect((await user)).toBe(null)
     expect(response).toEqual(left(new InvalidEmailError()))
+  })
+
+  it('should not add user with invalid name', async () => {
+    const users: UserData[] = []
+    const repo: UserRepository = new InMemoryUserRepository(users)
+    const usecase: RegisterUserOnMailingList = new RegisterUserOnMailingList(repo)
+
+    const invalidName = ' '
+    const email = 'vinicius@email.com'
+
+    const response = await usecase.registerUserOnMailingList({ name: invalidName, email: email })
+
+    const user = repo.findUserByEmail(email)
+    expect((await user)).toBe(null)
+    expect(response).toEqual(left(new InvalidNameError()))
   })
 })
