@@ -1,5 +1,5 @@
-import { Either, left, right } from '../shared/either'
-import { InvalidEmailError } from './errors/invalid-email-error'
+import { Either, left, right } from '@/shared'
+import { InvalidEmailError } from '@/entities/errors'
 
 export class Email {
   private readonly email: string
@@ -13,7 +13,7 @@ export class Email {
       return right(new Email(email))
     }
 
-    return left(new InvalidEmailError())
+    return left(new InvalidEmailError(email))
   }
 
   static validate (email: string): boolean {

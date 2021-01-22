@@ -1,5 +1,5 @@
-import { Either, left, right } from '../shared/either'
-import { InvalidNameError } from './errors/invalid-name-error'
+import { Either, left, right } from '@/shared'
+import { InvalidNameError } from '@/entities/errors'
 
 export class Name {
   private readonly name: string
@@ -13,7 +13,7 @@ export class Name {
       return right(new Name(name))
     }
 
-    return left(new InvalidNameError())
+    return left(new InvalidNameError(name))
   }
 
   public static validate (name: string): boolean {
