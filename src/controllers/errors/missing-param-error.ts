@@ -1,0 +1,10 @@
+/* eslint-disable constructor-super */
+export class MissingParamError extends Error {
+  public readonly name = 'MissingParamError'
+
+  constructor (
+    param: string
+  ) {
+    super(`Missing parameter from request: ${param}`)
+  }
+}
