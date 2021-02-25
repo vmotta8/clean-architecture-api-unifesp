@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev -r tsconfig-paths/register 'src/main/server.ts'",
+    "dev": "ts-node-dev -r tsconfig-paths/register 'src/main/server.ts'",
+    "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test-verbose": "jest --passWithNoTests --runInBand",
